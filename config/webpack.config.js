@@ -20,8 +20,67 @@ let config = {
       }
     }),
     // 清理/dist文件夹
-    new CleanWebpackPlugin()
-  ]
+    new CleanWebpackPlugin(),
+
+  ],
+  module: {
+    rules: [
+      {
+        test: /.ejs$/,
+        use: [
+          {
+            loader: "ejs-webpack-loader",
+            options: {
+              htmlmin: true
+            }
+          }
+        ]
+      },
+      {
+        test: /.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      },
+      {
+        test: /.(jpg|jpeg|png|gif|svg)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              name: '[name]-[hash:5].[ext]',
+              limit: 1024
+            }
+          }
+        ]
+      },
+      {
+        test: /.scss$/,
+        use: [{
+          loader: "style-loader",
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }, {
+          loader: "css-loader",
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }, {
+          loader: "sass-loader",
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }, {
+          loader: "postcss-loader",
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }]
+      }
+    ]
+  },
 }
 
 module.exports = config

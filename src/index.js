@@ -1,5 +1,17 @@
-import sum from './sum'
-import minus from './minus'
+import Modal from './components/test/modal'
+import './assets/style/common.css'
 
-console.log('sum(1, 2): ' + sum(1, 2))
-console.log('minus(5, 2): ' + minus(5, 2))
+const App = function () {
+  let div = document.createElement('div')
+  div.setAttribute('id', 'app')
+  document.body.appendChild(div)
+  let dom = document.getElementById('app')
+  let modal = new Modal()
+  dom.innerHTML = modal.template({
+    title: '标题',
+    content: '内容',
+    footer: '底部'
+  })
+}
+
+const app = new App()
