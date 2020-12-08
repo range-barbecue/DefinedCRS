@@ -1,0 +1,57 @@
+const Webpack = require('webpack');
+const merge = require('webpack-merge');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const common = require('./webpack.common.js');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+
+module.exports = merge(common, {
+  mode: 'production',
+  devtool: 'source-map',
+  stats: 'errors-only',
+  bail: true,
+  output: {
+    filename: 'js/[name].[chunkhash:8].js',
+    chunkFilename: 'js/[name].[chunkhash:8].chunk.js'
+  },
+  plugins: [
+    new Webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+    new Webpack.optimize.ModuleConcatenationPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[chunkhash:8].css'
+    }),
+    new ExtractTextPlugin({
+      filename: 'css/[name].[chunkhash:8].css'
+    }),
+    new OptimizeCssAssetsPlugin()
+  ],
+  module: {
+    rules: [{
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: 'babel-loader'
+      },
+      {
+        test: /\.css/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'less-loader'
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: ExtractTextPlugin.extract({
+          use: [{
+            loader: 'css-loader'
+          }, {
+            loader: 'less-loader'
+          }],
+          fallback: 'style-loader'
+        })
+      }
+    ]
+  }
+});
