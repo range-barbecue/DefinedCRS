@@ -1,6 +1,5 @@
 {
   "name": "webpack4-devkit",
-  "version": "1.0",
   "description": "A lightweight Dev Kit for your frontend project was based on webpack.",
   "scripts": {
     "start": "webpack-dev-server --open --config webpack/webpack.config.dev.js",
@@ -40,6 +39,9 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "leaflet": "^1.7.1"
+    "core-js": "^3.8.1",
+    "highlight.js": "^10.4.1",
+    "leaflet": "^1.7.1",
+    "proj4leaflet": "^1.0.2"
   }
 }

@@ -2,18 +2,29 @@
 @body-color: #fff;
 
 body {
-  color: @body-color;
-  font-family: sans-serif;
-  text-align: center;
+  background-color: #fafafa;
+  // color: @body-color;
+  display: flex;
+  padding: 0;
+  margin: 0;
 
   .map{
-    position: absolute;
     width: 50vw;
     height: 100vh;
-    left: 0;
-    top: 0;
-    // transform: translate(-50%,-50%);
-    // border: 1px solid #2B3A42;
   }
+
+  .demo-code{
+    width: 50vw;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    .img-wrap{
+      width: 100%;
+      overflow-x: scroll;
+    }
+  }
+
 }
 
